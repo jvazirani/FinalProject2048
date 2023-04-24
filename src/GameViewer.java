@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class gameviewer {
+import java.awt.*;
+public class GameViewer {
+
+    public GameViewer(Board b){
+
+    }
+
+    public void Paint(Graphics g)
 }
