@@ -4,8 +4,8 @@ public class tile {
     private int row;
     private int col;
     private boolean isWinningSquare;
-    private final int SQUARE_HEIGHT = 100;
-    private GameViewer g;
+    private final int TILE_HEIGHT = 100;
+    private GameViewer t;
     private int value;
     public tile(int row, int col){
         this.row = row;
@@ -36,9 +36,11 @@ public class tile {
 
 
 
-//    public void draw(Graphics g, GameViewer game){
-//        //
-//    }
+    public void draw(Graphics g, GameViewer game){
+        int x = 400;
+        int y = 400;
+        g.drawImage(t.getImages()[0], x, y, TILE_HEIGHT, TILE_HEIGHT, t);
+    }
 
 //    public String toString(){
 //        return this.marker;
