@@ -1,5 +1,5 @@
 import java.awt.*;
-public class tile {
+public class Tile {
     private String marker;
     private int row;
     private int col;
@@ -7,7 +7,7 @@ public class tile {
     private final int TILE_HEIGHT = 100;
     private GameViewer t;
     private int value;
-    public tile(int row, int col){
+    public Tile(int row, int col){
         this.row = row;
         this.col = col;
 //        this.marker = Board.BLANK;
