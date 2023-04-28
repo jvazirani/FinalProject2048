@@ -12,19 +12,9 @@ public class Tile {
         this.col = col;
 //        this.marker = Board.BLANK;
         this.isWinningSquare = false;
-        value = generateNewVal();
+        value = 0;
     }
 
-    public int generateNewVal(){
-        // Generate random num between 1 and 10
-        int random = (int) ((Math.random() * 10) + 1);
-        // Generate a 2 90% of the time, so random will be greater than 1 90% of the time
-        if (random > 1){
-            return 2;
-        }
-        // Other 10% of the time generate a 4
-        return 4;
-    }
 
     public int getValue(){
         return value;
@@ -32,6 +22,14 @@ public class Tile {
 
     public void setValue(int newVal){
         value = newVal;
+    }
+
+    // Returns true if the tile is empty
+    public boolean isEmpty(){
+        if (value == 0){
+            return true;
+        }
+        return false;
     }
 
 
