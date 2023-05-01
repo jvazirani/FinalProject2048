@@ -41,6 +41,69 @@ public class Game {
     public void shiftUp(){
         for(int i = 0; i < board.length; i++){
             for (int j = 0; j < board[0].length; i++){
+                // If a tiles value is equal to the one above it, combine them
+                if (board[i][j].getValue() == board[i + 1][j].getValue()){
+                    board[i - 1][j].setValue(board[i - 1][j].getValue() * 2);
+                    // Then set the original value back to empty/0
+                    board[i][j].setValue(0);
+                }
+            }
+        }
+    }
+
+    public void shiftDown() {
+        // Move all the zeros up before making comparisons
+        shiftZerosUp();
+        for (int j = 0; j < board.length; j++){
+            // Goes from index 3 to 0
+            for (int i = board[0].length - 1; i > 0; i--){
+                // If a boards value is equal to the one above it, combine them
+                if (board[i][j].getValue() == board[i - 1][j].getValue()){
+                    board[i][j].setValue(board[i-1][j].getValue() *  2);
+                    board[i - 1][j].setValue(0);
+                }
+                // Move any excess zeros back up
+                shiftZerosUp();
+            }
+        }
+    }
+
+    public void shiftZerosUp(){
+        int temp;
+        for (int j = 0; j < board.length; j++){
+            for (int i = 3; i > 0; i--) {
+                // if you run into a zero, move it one space to the left by swapping it
+                if(board[i][j].getValue() == 0) {
+                    board[i][j].setValue(board[i-1][j].getValue());
+                    board[i-1][j].setValue(0);
+                    }
+                }
+        }
+    }
+
+
+    public void shiftRight(){
+        for(int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[0].length; i++){
+                // If the space above the value is empty, move it up first
+                if (board[i + 1][j].getValue() == 0){
+                    board[i + 1][j].setValue(board[i][j].getValue());
+                    board[i][j].setValue(0);
+                }
+                // If a tiles value is equal to the one above it, combine them
+                if (board[i][j].getValue() == board[i + 1][j].getValue()){
+                    board[i + 1][j].setValue(board[i + 1][j].getValue() * 2);
+                    // Then set the original value back to empty/0
+                    board[i][j].setValue(0);
+                }
+            }
+        }
+    }
+
+
+    public void shiftLeft(){
+        for(int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[0].length; i++){
                 // If the space above the value is empty, move it up first
                 if (board[i + 1][j].getValue() == 0){
                     board[i + 1][j].setValue(board[i][j].getValue());
@@ -92,11 +155,10 @@ public class Game {
     }
     public void run(){
         System.out.println("Welcome to 2048!");
+        this.newTile();
+        this.newTile();
         this.printBoard();
         while(!this.checkLose()){
-            // Draw board
-            this.printBoard();
-            this.newTile();
             // Collect user input for move
             Scanner s = new Scanner(System.in);
             System.out.println("Move: ");
@@ -105,21 +167,21 @@ public class Game {
             // Shift right
             if(move.equals("a"))
             {
-                shift_right();
+                shiftRight();
                 newTile();
                 this.printBoard();
             }
             // Shift left
             else if(move.equals("d"))
             {
-                shift_left();
+                shiftLeft();
                 newTile();
                 this.printBoard();
             }
             // Shift down
             else if(move.equals("s"))
             {
-                shift_down();
+                shiftDown();
                 newTile();
                 this.printBoard();
             }
