@@ -11,6 +11,11 @@ public class Game {
                 this.board[i][j] = new Tile(i, j);
             }
         }
+        window = new GameViewer(this);
+    }
+
+    public Tile[][] getBoard(){
+        return board;
     }
 
     public int generateNewVal(){
@@ -39,13 +44,29 @@ public class Game {
 
     // Method to shift the squares to the right depending on the tile
     public void shiftUp(){
-        for(int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[0].length; i++){
+        // Move all the zeros down
+        shiftZerosDown();
+        // Start indexes at 0, so prioritizing combos at top
+        for(int j = 0; j < board.length; j++){
+            for (int i = 0; i < board[0].length - 1; i++){
                 // If a tiles value is equal to the one above it, combine them
                 if (board[i][j].getValue() == board[i + 1][j].getValue()){
-                    board[i - 1][j].setValue(board[i - 1][j].getValue() * 2);
-                    // Then set the original value back to empty/0
-                    board[i][j].setValue(0);
+                    board[i][j].setValue(board[i][j].getValue() * 2);
+                    // Set other tile to zero
+                    board[i + 1][j].setValue(0);
+                }
+                shiftZerosDown();
+            }
+        }
+    }
+
+    public void shiftZerosDown(){
+        for (int j = 0; j < board.length; j++){
+            for (int i = 0; i < board.length - 1; i++) {
+                // If there is a zero, move it one down
+                if(board[i][j].getValue() == 0) {
+                    board[i][j].setValue(board[i + 1][j].getValue());
+                    board[i + 1][j].setValue(0);
                 }
             }
         }
@@ -56,6 +77,7 @@ public class Game {
         shiftZerosUp();
         for (int j = 0; j < board.length; j++){
             // Goes from index 3 to 0
+            // Because prioritizes combinations down first
             for (int i = board[0].length - 1; i > 0; i--){
                 // If a boards value is equal to the one above it, combine them
                 if (board[i][j].getValue() == board[i - 1][j].getValue()){
@@ -69,55 +91,75 @@ public class Game {
     }
 
     public void shiftZerosUp(){
-        int temp;
         for (int j = 0; j < board.length; j++){
-            for (int i = 3; i > 0; i--) {
+            for (int i = board[0].length - 1; i > 0; i--) {
                 // if you run into a zero, move it one space to the left by swapping it
                 if(board[i][j].getValue() == 0) {
                     board[i][j].setValue(board[i-1][j].getValue());
                     board[i-1][j].setValue(0);
-                    }
                 }
+            }
         }
     }
 
 
     public void shiftRight(){
-        for(int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[0].length; i++){
-                // If the space above the value is empty, move it up first
-                if (board[i + 1][j].getValue() == 0){
-                    board[i + 1][j].setValue(board[i][j].getValue());
-                    board[i][j].setValue(0);
+        shiftZerosLeft();
+        for (int i = 0; i < board.length; i++){
+            // Starts at index 3 because prioritizing combinations to the right
+            for (int j = board[0].length - 1; j > 0; j--){
+                if(board[i][j].getValue() == board[i][j - 1].getValue()){
+                    // Combine them
+                    board[i][j].setValue(board[i][j - 1].getValue() * 2);
+                    board[i][j - 1].setValue(0);
                 }
-                // If a tiles value is equal to the one above it, combine them
-                if (board[i][j].getValue() == board[i + 1][j].getValue()){
-                    board[i + 1][j].setValue(board[i + 1][j].getValue() * 2);
-                    // Then set the original value back to empty/0
-                    board[i][j].setValue(0);
+                shiftZerosLeft();
+            }
+        }
+    }
+
+    void shiftZerosLeft(){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = board[0].length - 1; j > 0; j--) {
+                // If there is a zero, move it one to the left
+                if(board[i][j].getValue() == 0) {
+                    board[i][j].setValue(board[i][j - 1].getValue());
+                    board[i][j-1].setValue(0);
                 }
             }
         }
     }
 
 
-    public void shiftLeft(){
-        for(int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[0].length; i++){
-                // If the space above the value is empty, move it up first
-                if (board[i + 1][j].getValue() == 0){
-                    board[i + 1][j].setValue(board[i][j].getValue());
-                    board[i][j].setValue(0);
+    public void shiftLeft() {
+        // Move all the zeros to the right
+        shiftZerosRight();
+        // Start everything at top left index, because prioritizing the left combos
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length - 1; j++) {
+                // If it is equal to its neighbor
+                if (board[i][j].getValue() == board[i][j+1].getValue()) {
+                    board[i][j].setValue(board[i][j].getValue() * 2);
+                    board[i][j+1].setValue(0);
                 }
-                // If a tiles value is equal to the one above it, combine them
-                if (board[i][j].getValue() == board[i + 1][j].getValue()){
-                    board[i + 1][j].setValue(board[i + 1][j].getValue() * 2);
-                    // Then set the original value back to empty/0
-                    board[i][j].setValue(0);
+                //  Move all the zeros back
+                shiftZerosRight();
+            }
+        }
+    }
+
+    public void shiftZerosRight(){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length - 1; j++) {
+                // If there's a zero, move it one to the right
+                if(board[i][j].getValue() == 0) {
+                    board[i][j].setValue(board[i][j + 1].getValue());
+                    board[i][j + 1].setValue(0);
                 }
             }
         }
     }
+
 
     // Checks the board for a win (getting a 2048 tile)
     // Returns true if there is a win
@@ -134,6 +176,7 @@ public class Game {
 
     // Returns true if there is a lose
     // Returns false if there is not a lose
+    // TODO: update method to if theres to adjacent tiles don't return false
     public boolean checkLose(){
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++)
@@ -159,6 +202,7 @@ public class Game {
         this.newTile();
         this.printBoard();
         while(!this.checkLose()){
+            window.repaint();
             // Collect user input for move
             Scanner s = new Scanner(System.in);
             System.out.println("Move: ");
@@ -167,14 +211,14 @@ public class Game {
             // Shift right
             if(move.equals("a"))
             {
-                shiftRight();
+                shiftLeft();
                 newTile();
                 this.printBoard();
             }
             // Shift left
             else if(move.equals("d"))
             {
-                shiftLeft();
+                shiftRight();
                 newTile();
                 this.printBoard();
             }
@@ -194,6 +238,7 @@ public class Game {
             }
 
     }
+        System.out.println("YOU LOSE");
 
     }
 

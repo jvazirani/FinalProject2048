@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="worked on shift methods">
+    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="shift down works">
+      <change afterPath="$PROJECT_DIR$/Resources/16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resources/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resources/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resources/8.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +45,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Resources" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682701021343</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="shift down works">
+      <created>1682906749916</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682906749916</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,7 +113,8 @@
     <MESSAGE value="continued working hw 4/26" />
     <MESSAGE value="continued working 4/26" />
     <MESSAGE value="worked on shift methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="worked on shift methods" />
+    <MESSAGE value="shift down works" />
+    <option name="LAST_COMMIT_MESSAGE" value="shift down works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
