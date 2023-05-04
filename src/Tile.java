@@ -35,9 +35,12 @@ public class Tile {
 
 
     public void draw(Graphics g, GameViewer game){
-        int x = 400;
-        int y = 400;
+        int x = 40;
+        int y = 40;
         g.drawImage(game.getImages()[0], x, y, TILE_HEIGHT, TILE_HEIGHT, game);
+        g.drawImage(game.getImages()[1], x + 200, y + 200, TILE_HEIGHT, TILE_HEIGHT, game);
+        g.drawImage(game.getImages()[2], x + 400, y + 400, TILE_HEIGHT, TILE_HEIGHT, game);
+        g.drawImage(game.getImages()[3], x + 600, y + 600, TILE_HEIGHT, TILE_HEIGHT, game);
     }
 
 //    public String toString(){

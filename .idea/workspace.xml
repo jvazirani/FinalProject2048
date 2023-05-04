@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="shift down works">
-      <change afterPath="$PROJECT_DIR$/Resources/16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/8.png" afterDir="false" />
+    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="finished back end, got a window!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682906749916</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="finished back end, got a window!">
+      <created>1682978553706</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682978553706</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -114,7 +115,8 @@
     <MESSAGE value="continued working 4/26" />
     <MESSAGE value="worked on shift methods" />
     <MESSAGE value="shift down works" />
-    <option name="LAST_COMMIT_MESSAGE" value="shift down works" />
+    <MESSAGE value="finished back end, got a window!" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished back end, got a window!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -123,6 +125,11 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tile.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
