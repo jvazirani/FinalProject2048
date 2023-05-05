@@ -1,10 +1,19 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 public class Game {
     private GameViewer window;
     private Tile[][] board;
 
+    private Image[] numbers;
+
     public Game(){
+        numbers = new Image[11];
+        numbers[0] = new ImageIcon("Resources/2.png").getImage();
+        numbers[1] = new ImageIcon("Resources/4.png").getImage();
+        numbers[2] = new ImageIcon("Resources/8.png").getImage();
+        numbers[3] = new ImageIcon("Resources/16.png").getImage();
         this.board = new Tile[4][4];
         for(int i = 0; i < this.board.length; i++){
             for (int j = 0; j < this.board[0].length; j++){
@@ -12,6 +21,10 @@ public class Game {
             }
         }
         window = new GameViewer(this);
+
+    }
+    public Image[] getImages(){
+        return numbers;
     }
 
     public Tile[][] getBoard(){
