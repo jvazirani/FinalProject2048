@@ -17,16 +17,20 @@ public class GameViewer extends JFrame  implements KeyListener {
         this.setTitle("2048");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);
+        this.addKeyListener(this);
     }
 
 
     public void paint(Graphics g) {
+        g.setColor(Color.white);
+        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         int x = 0;
         int y = 0;
         Tile[][] board = game.getBoard();
+        g.setColor(Color.black);
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                board[i][j].draw(g, this, x + (i * 100), y + (j * 100));
+                board[i][j].draw(g, this, x + (j * 100), y + (i * 100));
             }
         }
     }
@@ -45,6 +49,7 @@ public class GameViewer extends JFrame  implements KeyListener {
         // However, as a KeyListener, this class must supply this method
     }
 
+    // TODO issue: when input a not valid input, stops options
     @Override
     public void keyPressed(KeyEvent e) {
         // The keyCode lets you know which key was pressed
@@ -52,17 +57,18 @@ public class GameViewer extends JFrame  implements KeyListener {
 
         if (keyCode == KeyEvent.VK_LEFT) {
             game.shiftLeft();
-            repaint();
+            game.newTile();
         } else if (keyCode == KeyEvent.VK_RIGHT) {
             game.shiftRight();
-            repaint();
+            game.newTile();
         } else if (keyCode == KeyEvent.VK_UP) {
             game.shiftUp();
-            repaint();
+            game.newTile();
         } else if (keyCode == KeyEvent.VK_DOWN) {
             game.shiftDown();
-            repaint();
+            game.newTile();
         }
+        repaint();
 
     }
 }

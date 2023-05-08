@@ -10,10 +10,18 @@ public class Game {
 
     public Game(){
         numbers = new Image[11];
-        numbers[0] = new ImageIcon("Resources/2.png").getImage();
-        numbers[1] = new ImageIcon("Resources/4.png").getImage();
-        numbers[2] = new ImageIcon("Resources/8.png").getImage();
-        numbers[3] = new ImageIcon("Resources/16.png").getImage();
+        for(int i = 0; i < numbers.length; i++){
+            numbers[i] = new ImageIcon("Resources/" + (int) Math.pow(2, i + 1) + ".png").getImage();
+        }
+//        numbers[0] = new ImageIcon("Resources/2.png").getImage();
+//        numbers[1] = new ImageIcon("Resources/4.png").getImage();
+//        numbers[2] = new ImageIcon("Resources/8.png").getImage();
+//        numbers[3] = new ImageIcon("Resources/16.png").getImage();
+//        numbers[4] = new ImageIcon("Resources/32.png").getImage();
+//        numbers[5] = new ImageIcon("Resources/64.png").getImage();
+//        numbers[6] = new ImageIcon("Resources/128.png").getImage();
+//        numbers[7] = new ImageIcon("Resources/256.png").getImage();
+
         this.board = new Tile[4][4];
         for(int i = 0; i < this.board.length; i++){
             for (int j = 0; j < this.board[0].length; j++){
