@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="images working">
-      <change afterPath="$PROJECT_DIR$/Resources/128.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/256.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/64.png" afterDir="false" />
+    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="got moves working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
@@ -114,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683328360431</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="got moves working">
+      <created>1683587187781</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1683587187781</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +139,8 @@
     <MESSAGE value="shift down works" />
     <MESSAGE value="finished back end, got a window!" />
     <MESSAGE value="images working" />
-    <option name="LAST_COMMIT_MESSAGE" value="images working" />
+    <MESSAGE value="got moves working" />
+    <option name="LAST_COMMIT_MESSAGE" value="got moves working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

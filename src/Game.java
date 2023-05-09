@@ -63,7 +63,7 @@ public class Game {
 
     }
 
-    // Method to shift the squares to the right depending on the tile
+    // Method to shift the board up
     public void shiftUp(){
         // Move all the zeros down
         shiftZerosDown();
@@ -81,6 +81,7 @@ public class Game {
         }
     }
 
+    // Helper method that shifts all the zeros down
     public void shiftZerosDown(){
         for (int j = 0; j < board.length; j++){
             for (int i = 0; i < board.length - 1; i++) {
@@ -197,13 +198,41 @@ public class Game {
 
     // Returns true if there is a lose
     // Returns false if there is not a lose
-    // TODO: update method to if theres to adjacent tiles don't return false
+    // TODO fix method so cols together
     public boolean checkLose(){
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[0].length; j++)
-                if(board[i][j].getValue() == 0){
+        int value;
+        for (int i = 1; i < board.length - 1; i++) {
+            for (int j = 1; j < board[0].length - 1; j++) {
+                value = board[i][j].getValue();
+                if (value == 0) {
                     return false;
                 }
+                else if((value == board[i][j + 1].getValue()) || (value == board[i][j - 1].getValue())
+                        || (value == board[i + 1][j].getValue()) || ( value == board[i - 1][j].getValue())){
+                    return false;
+                }
+            }
+        }
+        return checkCol(0) && checkCol(board.length - 1) && checkRow(0)
+                && checkRow(board.length - 1);
+    }
+
+
+    // Helper method for lose, returns false if there are two adjacent tiles in a col
+    public boolean checkCol(int startCoor){
+        for(int i = 0; i < board[0].length - 1; i++){
+            if(board[i][startCoor].getValue() == board[i+1][startCoor].getValue()){
+                return false;
+            }
+        }
+        return true;
+    }
+    // Helper method for lose, returns false if there are two adjacent tiles in a row
+    public boolean checkRow(int startCoor){
+        for(int i = 0; i < board.length - 1; i++){
+            if(board[startCoor][i].getValue() == board[startCoor][i + 1].getValue()){
+                return false;
+            }
         }
         return true;
     }
