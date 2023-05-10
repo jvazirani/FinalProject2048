@@ -18,6 +18,8 @@ public class GameViewer extends JFrame  implements KeyListener {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);
         this.addKeyListener(this);
+        Toolkit.getDefaultToolkit().sync();
+
     }
 
 
@@ -35,11 +37,14 @@ public class GameViewer extends JFrame  implements KeyListener {
         }
         g.setFont(new Font("Serif", Font.BOLD, 100));
         g.drawString("SCORE: ", 400, 100);
+        g.drawString(String.valueOf(game.getScore()), 600, 200);
         if(game.checkLose()){
             g.setColor(Color.red);
             g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
             g.setColor(Color.black);
             g.drawString("YOU LOSE", 100, 400);
+            g.setFont(new Font("new game", Font.PLAIN, 30));
+            g.drawString("Click the space bar for a new game", 50, 500);
         }
         if(game.checkWin()){
             g.setColor(Color.red);
@@ -69,18 +74,22 @@ public class GameViewer extends JFrame  implements KeyListener {
     public void keyPressed(KeyEvent e) {
         // The keyCode lets you know which key was pressed
         int keyCode = e.getKeyCode();
-
-        if (keyCode == KeyEvent.VK_LEFT) {
-            game.shiftLeft();
-        } else if (keyCode == KeyEvent.VK_RIGHT) {
-            game.shiftRight();
-        } else if (keyCode == KeyEvent.VK_UP) {
-            game.shiftUp();
-        } else if (keyCode == KeyEvent.VK_DOWN) {
-            game.shiftDown();
+        if(!game.checkLose()){
+            if (keyCode == KeyEvent.VK_LEFT) {
+                game.shiftLeft();
+            } else if (keyCode == KeyEvent.VK_RIGHT) {
+                game.shiftRight();
+            } else if (keyCode == KeyEvent.VK_UP) {
+                game.shiftUp();
+            } else if (keyCode == KeyEvent.VK_DOWN) {
+                game.shiftDown();
+            }
+            System.out.println(keyCode);
         }
-        System.out.println(keyCode);
+        if(keyCode == KeyEvent.VK_SPACE){
+            game.reset();
+        }
         repaint();
-
+        Toolkit.getDefaultToolkit().sync();
     }
 }

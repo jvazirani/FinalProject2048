@@ -7,6 +7,8 @@ public class Tile {
     private boolean isWinningSquare;
     private final int TILE_HEIGHT = 100;
     private GameViewer game;
+
+    private Image tileImage;
     private int value;
 
     private final int BOARD_WIDTH = 4;
@@ -35,13 +37,12 @@ public class Tile {
 
     // Returns true if the tile is empty
     public boolean isEmpty(){
-        if (value == 0){
-            return true;
-        }
-        return false;
+        return value == 0;
     }
 
-
+    public void setTileImage(Image image){
+        this.tileImage = image;
+    }
 
     public void draw(Graphics g, GameViewer game, int x, int y){
 //        int x = 200;
