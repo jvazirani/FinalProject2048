@@ -52,12 +52,14 @@ public class Game {
 
     // Generates a new tile on a random spot on the board
     public void newTile(){
-        int randXcoordinate = (int) (Math.random() * 3);
-        int randYcoordinate = (int) (Math.random() * 3);
-        // While there is not a space on the board, keep generating values
+        int randXcoordinate = (int) (Math.random() * 4);
+        int randYcoordinate = (int) (Math.random() * 4);
+        // While that spot is taken, keep generating values
         while (!(this.board[randXcoordinate][randYcoordinate].isEmpty())){
-            randXcoordinate = (int) (Math.random() * 3);
-            randYcoordinate = (int) (Math.random() * 3);
+            randXcoordinate = (int) (Math.random() * 4);
+            randYcoordinate = (int) (Math.random() * 4);
+            System.out.println("Rand x:" + randXcoordinate);
+            System.out.println("Rand y:" + randYcoordinate);
         }
         board[randXcoordinate][randYcoordinate].setValue(generateNewVal());
 
@@ -66,6 +68,7 @@ public class Game {
     // Method to shift the board up
     public void shiftUp(){
         // Move all the zeros down
+        boolean canShift = false;
         shiftZerosDown();
         // Start indexes at 0, so prioritizing combos at top
         for(int j = 0; j < board.length; j++){
@@ -75,9 +78,13 @@ public class Game {
                     board[i][j].setValue(board[i][j].getValue() * 2);
                     // Set other tile to zero
                     board[i + 1][j].setValue(0);
+                    canShift = true;
                 }
                 shiftZerosDown();
             }
+        }
+        if(canShift){
+            newTile();
         }
     }
 
@@ -96,6 +103,7 @@ public class Game {
 
     public void shiftDown() {
         // Move all the zeros up before making comparisons
+        boolean canShift = false;
         shiftZerosUp();
         for (int j = 0; j < board.length; j++){
             // Goes from index 3 to 0
@@ -105,10 +113,14 @@ public class Game {
                 if (board[i][j].getValue() == board[i - 1][j].getValue()){
                     board[i][j].setValue(board[i-1][j].getValue() *  2);
                     board[i - 1][j].setValue(0);
+                    canShift = true;
                 }
                 // Move any excess zeros back up
                 shiftZerosUp();
             }
+        }
+        if(canShift){
+            newTile();
         }
     }
 
@@ -127,6 +139,7 @@ public class Game {
 
     public void shiftRight(){
         shiftZerosLeft();
+        boolean canShift = false;
         for (int i = 0; i < board.length; i++){
             // Starts at index 3 because prioritizing combinations to the right
             for (int j = board[0].length - 1; j > 0; j--){
@@ -134,8 +147,12 @@ public class Game {
                     // Combine them
                     board[i][j].setValue(board[i][j - 1].getValue() * 2);
                     board[i][j - 1].setValue(0);
+                    canShift = true;
                 }
                 shiftZerosLeft();
+            }
+            if(canShift){
+                newTile();
             }
         }
     }
@@ -156,6 +173,7 @@ public class Game {
     public void shiftLeft() {
         // Move all the zeros to the right
         shiftZerosRight();
+        boolean canShift = false;
         // Start everything at top left index, because prioritizing the left combos
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length - 1; j++) {
@@ -163,10 +181,14 @@ public class Game {
                 if (board[i][j].getValue() == board[i][j+1].getValue()) {
                     board[i][j].setValue(board[i][j].getValue() * 2);
                     board[i][j+1].setValue(0);
+                    canShift = true;
                 }
                 //  Move all the zeros back
                 shiftZerosRight();
             }
+        }
+        if(canShift){
+            newTile();
         }
     }
 
@@ -221,6 +243,9 @@ public class Game {
     // Helper method for lose, returns false if there are two adjacent tiles in a col
     public boolean checkCol(int startCoor){
         for(int i = 0; i < board[0].length - 1; i++){
+            if(board[i][startCoor].getValue() == 0){
+                return false;
+            }
             if(board[i][startCoor].getValue() == board[i+1][startCoor].getValue()){
                 return false;
             }
@@ -230,6 +255,9 @@ public class Game {
     // Helper method for lose, returns false if there are two adjacent tiles in a row
     public boolean checkRow(int startCoor){
         for(int i = 0; i < board.length - 1; i++){
+            if(board[startCoor][i].getValue() == 0){
+                return false;
+            }
             if(board[startCoor][i].getValue() == board[startCoor][i + 1].getValue()){
                 return false;
             }

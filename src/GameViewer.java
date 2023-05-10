@@ -34,6 +34,7 @@ public class GameViewer extends JFrame  implements KeyListener {
             }
         }
         g.setFont(new Font("Serif", Font.BOLD, 100));
+        g.drawString("SCORE: ", 400, 100);
         if(game.checkLose()){
             g.setColor(Color.red);
             g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -71,17 +72,14 @@ public class GameViewer extends JFrame  implements KeyListener {
 
         if (keyCode == KeyEvent.VK_LEFT) {
             game.shiftLeft();
-            game.newTile();
         } else if (keyCode == KeyEvent.VK_RIGHT) {
             game.shiftRight();
-            game.newTile();
         } else if (keyCode == KeyEvent.VK_UP) {
             game.shiftUp();
-            game.newTile();
         } else if (keyCode == KeyEvent.VK_DOWN) {
             game.shiftDown();
-            game.newTile();
         }
+        System.out.println(keyCode);
         repaint();
 
     }
