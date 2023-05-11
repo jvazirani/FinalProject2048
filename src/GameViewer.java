@@ -42,9 +42,11 @@ public class GameViewer extends JFrame  implements KeyListener {
                 board[i][j].draw(g, this, x + (j * 100), y + (i * 100));
             }
         }
+        g.setFont(new Font("instructions", Font.PLAIN,  25));
+        g.drawString(game.getInstructions(), 20, 550);
         g.setFont(new Font("Serif", Font.BOLD, 100));
         g.drawString("SCORE: ", 400, 100);
-        g.drawString(String.valueOf(game.getScore()), 600, 200);
+        g.drawString(String.valueOf(game.getScore()), 550, 200);
         if(game.checkLose()){
             g.setColor(Color.red);
             g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);

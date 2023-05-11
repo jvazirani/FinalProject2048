@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Resources/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/board.png" afterDir="false" />
+    <list default="true" id="357b207f-4b8f-472c-97f7-1d10af688a43" name="Changes" comment="almost done!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
@@ -140,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683756200990</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="almost done!">
+      <created>1683771431902</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683771431902</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,7 +168,8 @@
     <MESSAGE value="finished back end, got a window!" />
     <MESSAGE value="images working" />
     <MESSAGE value="got moves working" />
-    <option name="LAST_COMMIT_MESSAGE" value="got moves working" />
+    <MESSAGE value="almost done!" />
+    <option name="LAST_COMMIT_MESSAGE" value="almost done!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

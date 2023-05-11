@@ -48,12 +48,18 @@ public class Game {
         return 4;
     }
 
+    public String getInstructions(){
+        return "How to play: Combine alike numbers, to try to make higher numbers. You can do this " +
+                "by using the arrow keys to shift the board up, right, left, or down. The goal of the game" +
+                "is to get a 2048 tile. Click the space bar for a new game. ";
+    }
+
     public void reset(){
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
                 board[i][j].setValue(0);
                 board[i][j].setTileImage(null);
-                score = 0; 
+                score = 0;
             }
         }
         this.newTile();
