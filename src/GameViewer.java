@@ -8,8 +8,14 @@ public class GameViewer extends JFrame  implements KeyListener {
     private final int WINDOW_WIDTH = 800;
     private final int WINDOW_HEIGHT = 800;
 
+    private Image boardImage;
+
+    private Image background;
+
     public GameViewer(Game game) {
         this.game = game;
+        boardImage = new ImageIcon("Resources/board.png").getImage();
+        background = new ImageIcon("Resources/background.png").getImage();
 //        for(int i = 0; i < numbers.length; i++){
 //            numbers[i] = new ImageIcon("Resources/" + Math.pow(2, i + 1) + ".png").getImage();
 //        }
@@ -25,9 +31,10 @@ public class GameViewer extends JFrame  implements KeyListener {
 
     public void paint(Graphics g) {
         g.setColor(Color.white);
-        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        g.drawImage(background, 0 ,0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
         int x = 0;
         int y = 0;
+        g.drawImage(boardImage, 100, 100, 400, 400, this);
         Tile[][] board = game.getBoard();
         g.setColor(Color.black);
         for (int i = 0; i < board.length; i++) {

@@ -53,6 +53,7 @@ public class Game {
             for(int j = 0; j < board[0].length; j++){
                 board[i][j].setValue(0);
                 board[i][j].setTileImage(null);
+                score = 0; 
             }
         }
         this.newTile();
