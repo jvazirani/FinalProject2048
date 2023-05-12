@@ -43,10 +43,19 @@ public class GameViewer extends JFrame  implements KeyListener {
             }
         }
         g.setFont(new Font("instructions", Font.PLAIN,  25));
-        g.drawString(game.getInstructions(), 20, 550);
+        g.drawString("How to play: Combine alike numbers, to try to make higher", 20, 550);
+        g.drawString("numbers. You can do this by using the arrow keys to shift ", 20, 580);
+        g.drawString("the board up, right, left, or down. The goal of the game", 20, 610);
+        g.drawString("is to get a 2048 tile. Click the space bar for a new game.", 20, 640);
         g.setFont(new Font("Serif", Font.BOLD, 100));
         g.drawString("SCORE: ", 400, 100);
-        g.drawString(String.valueOf(game.getScore()), 550, 200);
+        g.drawString(String.valueOf(game.getScore()), 500, 200);
+        g.setFont(new Font("best", Font.BOLD, 50));
+        g.setColor(Color.darkGray);
+        game.updateBestScore();
+        g.drawString("Best Score: ", 500, 300);
+        g.drawString(String.valueOf(game.getBestScore()), 500, 350);
+        g.setFont(new Font("Serif", Font.BOLD, 100));
         if(game.checkLose()){
             g.setColor(Color.red);
             g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);

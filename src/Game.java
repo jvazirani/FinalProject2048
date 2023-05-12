@@ -9,6 +9,8 @@ public class Game {
     private Image[] numbers;
     private int score;
 
+    private int bestScore;
+
     private boolean canShiftLeft;
     private boolean canShiftRight;
     private boolean canShiftUp;
@@ -26,6 +28,7 @@ public class Game {
             }
         }
         score = 0;
+        bestScore = 0;
         window = new GameViewer(this);
 
     }
@@ -49,7 +52,7 @@ public class Game {
     }
 
     public String getInstructions(){
-        return "How to play: Combine alike numbers, to try to make higher numbers. You can do this " +
+        return "How to play: Combine alike numbers to try to make higher numbers. You can do this " +
                 "by using the arrow keys to shift the board up, right, left, or down. The goal of the game" +
                 "is to get a 2048 tile. Click the space bar for a new game. ";
     }
@@ -316,6 +319,16 @@ public class Game {
 
     public int getScore(){
         return score;
+    }
+
+    public void updateBestScore(){
+        if(score > bestScore){
+            bestScore = score;
+        }
+    }
+
+    public int getBestScore(){
+        return bestScore;
     }
     public void run(){
         System.out.println("Welcome to 2048!");
