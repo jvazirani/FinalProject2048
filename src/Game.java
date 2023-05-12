@@ -5,26 +5,32 @@ import java.util.Scanner;
 public class Game {
     private GameViewer window;
     private Tile[][] board;
-
     private Image[] numbers;
     private int score;
-
     private int bestScore;
 
+    // Variables that help determine if a new tile should be generated at the end of a move
     private boolean canShiftLeft;
     private boolean canShiftRight;
     private boolean canShiftUp;
     private boolean canShiftDown;
+
+    private final int NUMBERS_SIZE = 11;
+
+    private final int BOARD_WIDTH = 4;
+    private final int BOARD_HEIGHT = 4;
+
     public Game(){
-        numbers = new Image[11];
+        numbers = new Image[NUMBERS_SIZE];
         for(int i = 0; i < numbers.length; i++){
+            // Assign each element of numbers to its image, they are powers of two
             numbers[i] = new ImageIcon("Resources/" + (int) Math.pow(2, i + 1) + ".png").getImage();
         }
 
-        this.board = new Tile[4][4];
+        this.board = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
         for(int i = 0; i < this.board.length; i++){
             for (int j = 0; j < this.board[0].length; j++){
-                this.board[i][j] = new Tile(i, j);
+                this.board[i][j] = new Tile();
             }
         }
         score = 0;
@@ -32,23 +38,9 @@ public class Game {
         window = new GameViewer(this);
 
     }
-    public Image[] getImages(){
-        return numbers;
-    }
 
     public Tile[][] getBoard(){
         return board;
-    }
-
-    public int generateNewVal(){
-        // Generate random num between 1 and 10
-        int random = (int) ((Math.random() * 10) + 1);
-        // Generate a 2 90% of the time, so random will be greater than 1 90% of the time
-        if (random > 1){
-            return 2;
-        }
-        // Other 10% of the time generate a 4
-        return 4;
     }
 
     public String getInstructions(){
@@ -57,11 +49,12 @@ public class Game {
                 "is to get a 2048 tile. Click the space bar for a new game. ";
     }
 
+    // Resets the board back to its original state
     public void reset(){
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[0].length; j++){
-                board[i][j].setValue(0);
-                board[i][j].setTileImage(null);
+        for (Tile[] tiles : board) {
+            for (int j = 0; j < board[0].length; j++) {
+                tiles[j].setValue(0);
+                tiles[j].setTileImage(null);
                 score = 0;
             }
         }
@@ -80,15 +73,26 @@ public class Game {
             if(this.checkLose()){
                 return;
             }
-            System.out.println("Rand x:" + randXcoordinate);
-            System.out.println("Rand y:" + randYcoordinate);
         }
         board[randXcoordinate][randYcoordinate].setValue(generateNewVal());
+    }
 
+
+    // Method that generates a 2 90% of the time and a 4 10% of the time and returns the number generated
+    public int generateNewVal(){
+        // Generate random num between 1 and 10
+        int random = (int) ((Math.random() * 10) + 1);
+        // Generate a 2 90% of the time, so random will be greater than 1 90% of the time
+        if (random > 1){
+            return 2;
+        }
+        // Other 10% of the time generate a 4
+        return 4;
     }
 
     // Method to shift the board up
     public void shiftUp(){
+        // A variable that helps determine if a new tile should be generated at the end of a move
         canShiftUp = false;
         // Move all the zeros down
         shiftZerosDown();
@@ -106,12 +110,13 @@ public class Game {
                 shiftZerosDown();
             }
         }
+        // If tiles actually combined and moved, then generate a new tile
         if(canShiftUp){
             newTile();
         }
     }
 
-    // Helper method that shifts all the zeros down
+    // Helper method for shiftUp() that shifts all the zeros down
     public void shiftZerosDown(){
         for (int j = 0; j < board.length; j++){
             for (int i = 0; i < board.length - 1; i++) {
@@ -128,8 +133,8 @@ public class Game {
     }
 
     public void shiftDown() {
-        // Move all the zeros up before making comparisons
         canShiftDown = false;
+        // Move all the zeros up before making comparisons
         shiftZerosUp();
         for (int j = 0; j < board.length; j++){
             // Goes from index 3 to 0
@@ -170,15 +175,15 @@ public class Game {
     public void shiftRight(){
         canShiftRight = false;
         shiftZerosLeft();
-        for (int i = 0; i < board.length; i++){
+        for (Tile[] tiles : board) {
             // Starts at index 3 because prioritizing combinations to the right
-            for (int j = board[0].length - 1; j > 0; j--){
-                if(board[i][j].getValue() == board[i][j - 1].getValue()){
+            for (int j = board[0].length - 1; j > 0; j--) {
+                if (tiles[j].getValue() == tiles[j - 1].getValue()) {
                     // Combine them
-                    board[i][j].setValue(board[i][j - 1].getValue() * 2);
-                    board[i][j - 1].setValue(0);
+                    tiles[j].setValue(tiles[j - 1].getValue() * 2);
+                    tiles[j - 1].setValue(0);
                     canShiftRight = true;
-                    updateScore(board[i][j].getValue());
+                    updateScore(tiles[j].getValue());
                 }
                 shiftZerosLeft();
             }
@@ -189,13 +194,13 @@ public class Game {
     }
 
     void shiftZerosLeft(){
-        for (int i = 0; i < board.length; i++) {
+        for (Tile[] tiles : board) {
             for (int j = board[0].length - 1; j > 0; j--) {
                 // If there is a zero, move it one to the left
-                if(board[i][j].getValue() == 0) {
-                    board[i][j].setValue(board[i][j - 1].getValue());
-                    board[i][j-1].setValue(0);
-                    if(board[i][j - 1].getValue() != 0){
+                if (tiles[j].getValue() == 0) {
+                    tiles[j].setValue(tiles[j - 1].getValue());
+                    tiles[j - 1].setValue(0);
+                    if (tiles[j - 1].getValue() != 0) {
                         canShiftRight = true;
                     }
                 }
@@ -203,22 +208,21 @@ public class Game {
         }
     }
 
-
     public void shiftLeft() {
         canShiftLeft = false;
         // Move all the zeros to the right
         shiftZerosRight();
         // Start everything at top left index, because prioritizing the left combos
-        for (int i = 0; i < board.length; i++) {
+        for (Tile[] tiles : board) {
             for (int j = 0; j < board[0].length - 1; j++) {
                 // If it is equal to its neighbor
-                if (board[i][j].getValue() == board[i][j+1].getValue()) {
-                    board[i][j].setValue(board[i][j].getValue() * 2);
-                    board[i][j+1].setValue(0);
+                if (tiles[j].getValue() == tiles[j + 1].getValue()) {
+                    tiles[j].setValue(tiles[j].getValue() * 2);
+                    tiles[j + 1].setValue(0);
                     canShiftLeft = true;
-                    updateScore(board[i][j].getValue());
+                    updateScore(tiles[j].getValue());
                 }
-                //  Move all the zeros back
+                // Move all the zeros back
                 shiftZerosRight();
             }
         }
@@ -228,13 +232,13 @@ public class Game {
     }
 
     public void shiftZerosRight(){
-        for (int i = 0; i < board.length; i++) {
+        for (Tile[] tiles : board) {
             for (int j = 0; j < board[0].length - 1; j++) {
                 // If there's a zero, move it one to the right
-                if(board[i][j].getValue() == 0) {
-                    board[i][j].setValue(board[i][j + 1].getValue());
-                    board[i][j + 1].setValue(0);
-                    if(board[i][j + 1].getValue() != 0){
+                if (tiles[j].getValue() == 0) {
+                    tiles[j].setValue(tiles[j + 1].getValue());
+                    tiles[j + 1].setValue(0);
+                    if (tiles[j + 1].getValue() != 0) {
                         canShiftLeft = true;
                     }
                 }
@@ -242,13 +246,12 @@ public class Game {
         }
     }
 
-
     // Checks the board for a win (getting a 2048 tile)
     // Returns true if there is a win
     public boolean checkWin(){
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[0].length; j++){
-                if(board[i][j].getValue() == 2048){
+        for (Tile[] tiles : board) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (tiles[j].getValue() == 2048) {
                     return true;
                 }
             }
@@ -256,9 +259,8 @@ public class Game {
         return false;
     }
 
-    // Returns true if there is a lose
-    // Returns false if there is not a lose
-    // TODO fix method so cols together
+    // Returns true if there is a loss
+    // Returns false if there is not a loss
     public boolean checkLose(){
         int value;
         for (int i = 1; i < board.length - 1; i++) {
@@ -303,16 +305,6 @@ public class Game {
         return true;
     }
 
-    // Prints the board
-    public void printBoard() {
-        for (int i = 0; i < board[0].length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                System.out.print(board[i][j].getValue() + " ");
-            }
-            System.out.println();
-        }
-    }
-
     public void updateScore(int val){
         score += (val);
     }
@@ -331,48 +323,14 @@ public class Game {
         return bestScore;
     }
     public void run(){
-        System.out.println("Welcome to 2048!");
         this.newTile();
         this.newTile();
-        this.printBoard();
         while(!this.checkLose()){
             window.repaint();
-            // Collect user input for move
-            Scanner s = new Scanner(System.in);
-            System.out.println("Move: ");
-            String move = s.nextLine();
-            // Check for which shift
-            // Shift right
-            if(move.equals("a"))
-            {
-                shiftLeft();
-                this.printBoard();
-            }
-            // Shift left
-            else if(move.equals("d"))
-            {
-                shiftRight();
-                this.printBoard();
-            }
-            // Shift down
-            else if(move.equals("s"))
-            {
-                shiftDown();
-                this.printBoard();
-            }
-            // Shift up
-            else if(move.equals("w"))
-            {
-                shiftUp();
-                this.printBoard();
-            }
-
-    }
-        System.out.println("YOU LOSE");
-
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Game game = new Game();
         game.run();
     }

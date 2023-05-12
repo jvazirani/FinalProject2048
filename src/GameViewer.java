@@ -7,54 +7,50 @@ public class GameViewer extends JFrame  implements KeyListener {
     private Game game;
     private final int WINDOW_WIDTH = 800;
     private final int WINDOW_HEIGHT = 800;
-
     private Image boardImage;
-
     private Image background;
+
+    private final int TILE_HEIGHT = 100;
 
     public GameViewer(Game game) {
         this.game = game;
         boardImage = new ImageIcon("Resources/board.png").getImage();
         background = new ImageIcon("Resources/background.png").getImage();
-//        for(int i = 0; i < numbers.length; i++){
-//            numbers[i] = new ImageIcon("Resources/" + Math.pow(2, i + 1) + ".png").getImage();
-//        }
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("2048");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);
         this.addKeyListener(this);
         Toolkit.getDefaultToolkit().sync();
-
     }
-
 
     public void paint(Graphics g) {
         g.setColor(Color.white);
         g.drawImage(background, 0 ,0, WINDOW_WIDTH, WINDOW_HEIGHT, this);
-        int x = 0;
-        int y = 0;
-        g.drawImage(boardImage, 100, 100, 400, 400, this);
+        g.drawImage(boardImage, WINDOW_WIDTH / 4, WINDOW_HEIGHT / 4, WINDOW_WIDTH / 2,
+                WINDOW_HEIGHT / 2, this);
         Tile[][] board = game.getBoard();
         g.setColor(Color.black);
+        int x = 0;
+        int y = 0;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                board[i][j].draw(g, this, x + (j * 100), y + (i * 100));
+                board[i][j].draw(g, this, x + (j * TILE_HEIGHT), y + (i * TILE_HEIGHT));
             }
         }
         g.setFont(new Font("instructions", Font.PLAIN,  25));
-        g.drawString("How to play: Combine alike numbers, to try to make higher", 20, 550);
-        g.drawString("numbers. You can do this by using the arrow keys to shift ", 20, 580);
-        g.drawString("the board up, right, left, or down. The goal of the game", 20, 610);
-        g.drawString("is to get a 2048 tile. Click the space bar for a new game.", 20, 640);
+        g.drawString("How to play: Combine alike numbers, to try to make higher", 20, 600);
+        g.drawString("numbers. You can do this by using the arrow keys to shift ", 20, 630);
+        g.drawString("the board up, right, left, or down. The goal of the game", 20, 660);
+        g.drawString("is to get a 2048 tile. Click the space bar for a new game.", 20, 690);
         g.setFont(new Font("Serif", Font.BOLD, 100));
-        g.drawString("SCORE: ", 400, 100);
-        g.drawString(String.valueOf(game.getScore()), 500, 200);
+        g.drawString("SCORE: ", 50, 100);
+        g.drawString(String.valueOf(game.getScore()), 450, 100);
         g.setFont(new Font("best", Font.BOLD, 50));
         g.setColor(Color.darkGray);
         game.updateBestScore();
-        g.drawString("Best Score: ", 500, 300);
-        g.drawString(String.valueOf(game.getBestScore()), 500, 350);
+        g.drawString("Best Score: ", 50, 150);
+        g.drawString(String.valueOf(game.getBestScore()), 350, 150);
         g.setFont(new Font("Serif", Font.BOLD, 100));
         if(game.checkLose()){
             g.setColor(Color.red);
