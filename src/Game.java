@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
 
 public class Game {
     private GameViewer window;
@@ -51,6 +50,12 @@ public class Game {
 
     // Resets the board back to its original state
     public void reset(){
+        // Using a for each loop to improve the following competency:
+        // Can use for-each loops, understanding that they make copies of
+        // the values/references of the Array or ArrayList that it traverses.
+
+        // Writing a method to traverse a 2D array for the following competency:
+        // Can write nested for-loops to traverse 2D arrays.
         for (Tile[] tiles : board) {
             for (int j = 0; j < board[0].length; j++) {
                 tiles[j].setValue(0);
@@ -81,6 +86,9 @@ public class Game {
     // Method that generates a 2 90% of the time and a 4 10% of the time and returns the number generated
     public int generateNewVal(){
         // Generate random num between 1 and 10
+        // Casting the number as an int last, shows knowledge of the following competency:
+        // Understands operator precedence, including casting, boolean operators, pre-
+        // and post-increment, and method calls.
         int random = (int) ((Math.random() * 10) + 1);
         // Generate a 2 90% of the time, so random will be greater than 1 90% of the time
         if (random > 1){
@@ -275,6 +283,10 @@ public class Game {
                 }
             }
         }
+
+        // These statements with and's in between along with the following boolean expression with or's in between show:
+        // Understands operator precedence, including casting, boolean operators, pre-
+        // and post-increment, and method calls.
         return checkCol(0) && checkCol(board.length - 1) && checkRow(0)
                 && checkRow(board.length - 1);
     }
